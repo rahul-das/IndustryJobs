@@ -74,7 +74,7 @@ class JobsController < ApplicationController
     if current_user.admin?
       @job.update_attributes(approved: true)
     end
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: 'Job is successfully approved.'
   end
 
   def new_application

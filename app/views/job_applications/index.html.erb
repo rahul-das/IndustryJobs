@@ -1,11 +1,15 @@
-<p id="notice"><%= notice %></p>
+<div class="alert alert-info alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= notice %>
+</div>
 
 <h1>Job Applications</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Candidate</th>
+      <th>Candidate Email</th>
       <th>Job</th>
       <th>Status</th>
       <th>Response Status</th>
@@ -17,10 +21,11 @@
     <% @job_applications.each do |job_application| %>
       <tr>
         <td><%= job_application.candidate.name %></td>
+        <td><%= job_application.candidate.email %></td>
         <td><%= job_application.job.title %></td>
-        <td><%= job_application.status %></td>
-        <td><%= job_application.response_status %></td>
-        <td><%= link_to 'Invite for Interview', new_interview_path(job_application_id: job_application) %></td>
+        <td><%= job_application.status&.humanize %></td>
+        <td><%= job_application.response_status&.humanize %></td>
+        <td><%= link_to 'Invite for Interview', new_interview_path(job_application_id: job_application), class: "btn btn-success #{"disabled" if job_application.invitation_sent?}" %></td>
         <!-- <td><%#= link_to 'Edit', edit_job_application_path(job_application) %></td>
         <td><%#= link_to 'Destroy', job_application, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>

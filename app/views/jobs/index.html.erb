@@ -1,18 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="alert alert-info alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= notice %>
+</div>
 
 <h1>Jobs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Job Poster</th>
-      <th>Posted</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Job Poster</th>
+      <th scope="col">Posted</th>
       <% if user_signed_in? %>
-        <th>Status</th>
+        <th scope="col">Status</th>
       <% end %>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -26,13 +29,13 @@
         <% if user_signed_in? %>
           <td><%= job.approved? ? "approved" : "not approved" %></td>
           <% if current_user.admin? %>
-            <td><%= link_to 'Approve', approve_job_path(job) %></td>
+            <td><%= link_to 'Approve', approve_job_path(job), class: "btn btn-success #{"disabled" if job.approved?}" %></td>
           <% end %>
-          <td><%= link_to 'Show', job %></td>
-          <td><%= link_to 'Edit', edit_job_path(job) %></td>
-          <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', job, class: "btn btn-info" %></td>
+          <td><%= link_to 'Edit', edit_job_path(job), class: "btn btn-warning" %></td>
+          <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
         <% else %>
-          <td><%= link_to 'Apply', new_application_job_path(job) %></td>
+          <td><%= link_to 'Apply', new_application_job_path(job), class: "btn btn-primary" %></td>
         <% end %>
       </tr>
     <% end %>
@@ -41,5 +44,5 @@
 
 <br>
 <% if user_signed_in? && !current_user.admin? %>
-  <%= link_to 'New Job', new_job_path %>
+  <%= link_to 'New Job', new_job_path, class: "btn btn-link" %>
 <% end %>

@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Industryprime</title>
+    <title>IndustryJobs</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <% logger.info(params.inspect) %>
+  <% if ['users/registrations', 'users/sessions', 'jobs', 'job_applications', 'interviews', 'users', 'companies'].include?(params[:controller]) && ['new', 'index', 'new_application', 'edit'].include?(params[:action]) %>
+  <body class="text-center" data-gr-c-s-loaded="true" style="padding-bottom: 40px; background-color: #f5f5f5;">
+  <% else %>
   <body>
-    <ul class="hmenu">
-      <%= render 'users/menu/registration_items' %>
-      <%= render 'users/menu/login_items' %>
-      <%= render 'users/menu/navbar' %>
-    </ul>
+  <% end %>
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" href="<%= root_url %>">IndustryJobs</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <%= render 'users/menu/navbar' %>
+          <%= render 'users/menu/registration_items' %>
+          <%= render 'users/menu/login_items' %>
+        </ul>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

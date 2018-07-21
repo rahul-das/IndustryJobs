@@ -1,9 +1,16 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show]
 
   # GET /interviews
   # GET /interviews.json
   def index
+    if current_user.admin?
+      @interviews = Interview.all
+    else
+      job_applications = JobApplication.where(job: Job.where(user: current_user.company.users))
+      @interviews = Interview.where(job_application: job_applications)
+    end
     @interviews = Interview.all
   end
 

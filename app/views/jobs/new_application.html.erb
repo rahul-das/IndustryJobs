@@ -1,10 +1,13 @@
-<h1>Apply Job</h1>
+<div class="page-header" style="padding-top: 20px;">
+  <h1>Apply Job</h1>
+</div>
 
-<%= form_tag({controller: "jobs", action: "apply"}, method: "post") do %>
-  <%= text_field(:candidate, :name, placeholder: "Name") %>
-  <%= email_field(:candidate, :email, placeholder: "Email") %>
-  <%#= hidden_field_tag 'job_id', '#params[id]' %>
-  <%= submit_tag "Apply Job", data: { disable_with: "Please wait..." } %>
+<%= form_tag({controller: "jobs", action: "apply"}, method: "post", style: "width: 100%;max-width: 330px;padding: 15px;margin: auto;") do %>
+  <%= text_field(:candidate, :name, placeholder: "Name", class: "form-control") %>
+  <br/>
+  <%= email_field(:candidate, :email, placeholder: "Email", class: "form-control") %>
+  <br/>
+  <%= submit_tag "Apply Job", data: { disable_with: "Please wait..." }, class: "btn btn-lg btn-primary btn-block" %>
 <% end %>
 
 

@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<div class="alert alert-info alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= notice %>
+</div>
 
 <%= form_for @job_application, url: save_response_job_application_path(@job_application), html: {method: "post"} do |f| %>
 
