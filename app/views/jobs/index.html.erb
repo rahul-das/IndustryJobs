@@ -9,7 +9,9 @@
       <th>Description</th>
       <th>Job Poster</th>
       <th>Posted</th>
-
+      <% if user_signed_in? %>
+        <th>Status</th>
+      <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,10 +22,18 @@
         <td><%= job.title %></td>
         <td><%= job.description %></td>
         <td><%= "#{job.user.first_name} #{job.user.last_name}" %></td>
-        <td><%= "#{time_ago_in_words(job.created_at)} ago" %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= "#{time_ago_in_words(job.updated_at)} ago" %></td>
+        <% if user_signed_in? %>
+          <td><%= job.approved? ? "approved" : "not approved" %></td>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Approve', approve_job_path(job) %></td>
+          <% end %>
+          <td><%= link_to 'Show', job %></td>
+          <td><%= link_to 'Edit', edit_job_path(job) %></td>
+          <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td><%= link_to 'Apply', new_application_job_path(job) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

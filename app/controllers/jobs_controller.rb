@@ -1,13 +1,18 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :approve, :new_application, :apply]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :approve]
   # GET /jobs
   # GET /jobs.json
   def index
-    if user_signed_in? && !current_user.admin?
+    if user_signed_in?
+      if current_user.admin?
+        @jobs = Job.all
+      else  # Organisation User
         @jobs = current_user.jobs
-    else
-      @jobs = Job.all
+      end
+
+    else # guest users
+      @jobs = Job.where(approved: true)
     end
   end
 
@@ -45,7 +50,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     respond_to do |format|
-      if @job.update(job_params)
+      if @job.update(job_params.merge(approved: false))
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
@@ -62,6 +67,31 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def approve
+    if current_user.admin?
+      @job.update_attributes(approved: true)
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  def new_application
+    unless user_signed_in?
+      respond_to do |format|
+        format.html
+      end
+    end
+  end
+
+  def apply
+    unless user_signed_in?
+      logger.info "#{params.inspect}"
+      @candidate = Candidate.find_or_create_by(name: params[:candidate][:name], email: params[:candidate][:email])
+      if @candidate.present?
+        @job.job_applications.create(candidate: @candidate)
+      end
     end
   end
 
