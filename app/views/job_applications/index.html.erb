@@ -5,8 +5,24 @@
 
 <h1>Job Applications</h1>
 
+<%= form_tag(job_applications_path, method: "get", class: "row", style: "padding: 15px;margin: auto;") do %>
+
+  <div class="field col-md-3">
+    <%= select_tag 'status', options_for_select(JobApplication.statuses.map {|k, v| [k.humanize.capitalize, v]}), prompt: "Choose Status", class: "form-control" %>
+  </div>
+  <div class="field col-md-3">
+    <%= select_tag 'response_status', options_for_select(JobApplication.response_statuses.map {|k, v| [k.humanize.capitalize, v]}), prompt: "Choose Response Status", class: "form-control" %>
+  </div>
+  <div class="field col-md-3">
+    <%= select_tag 'job', options_from_collection_for_select(Job.where(job_applications: JobApplication.all), 'id', 'title'), prompt: "Choose Response Status", class: "form-control" %>
+  </div>
+  <div class="actions col-md-3">
+    <%= submit_tag 'Filter', class: "btn btn-secondary btn-block" %>
+  </div>
+<% end %>
+
 <table class="table table-hover">
-  <thead>
+  <thead class="thead-light">
     <tr>
       <th>Candidate</th>
       <th>Candidate Email</th>

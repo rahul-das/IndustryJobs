@@ -10,7 +10,9 @@ class JobApplicationsController < ApplicationController
     else
       @job_applications = JobApplication.where(job: Job.where(user: current_user.company.users))
     end
-
+    @job_applications = @job_applications.where(status: params[:status]) if params[:status].present?
+    @job_applications = @job_applications.where(response_status: params[:response_status]) if params[:response_status].present?
+    @job_applications = @job_applications.where(job: Job.find(params[:job])) if params[:job].present?
   end
 
   # GET /job_applications/1
