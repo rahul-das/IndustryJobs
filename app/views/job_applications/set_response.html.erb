@@ -3,16 +3,17 @@
   <%= notice %>
 </div>
 
-<%= form_for @job_application, url: save_response_job_application_path(@job_application), html: {method: "post"} do |f| %>
+<%= form_for @job_application, url: save_response_job_application_path(@job_application), html: {method: "post", style: "width: 100%;max-width: 330px;padding: 15px;margin: auto;"} do |f| %>
 
   <div class="field">
-    <%= f.label :rejection_reason %>
-    <%= f.select :rejection_reason, JobApplication.rejection_reasons.keys.map { |w| [w.humanize, w] }, prompt: true %>
+    <%= f.label :rejection_reason %><br/>
+    <%= f.select :rejection_reason, JobApplication.rejection_reasons.keys.map { |w| [w.humanize, w] }, {prompt: "Please select a reason for rejection"}, {class: "form-control"} %>
   </div>
+  <br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit', class: "btn btn-lg btn-primary btn-block" %>
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_job_application_path(@job_application) %> |
-<%= link_to 'Back', job_applications_path %>
+<%#= link_to 'Edit', edit_job_application_path(@job_application) %>
+<%#= link_to 'Back', job_applications_path %>

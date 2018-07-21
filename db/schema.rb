@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_21_120659) do
+ActiveRecord::Schema.define(version: 2018_07_21_181341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_07_21_120659) do
     t.integer "status", default: 0
     t.integer "response_status"
     t.string "response_token"
-    t.string "rejection_reason"
+    t.integer "rejection_reason"
     t.index ["candidate_id"], name: "index_job_applications_on_candidate_id"
     t.index ["job_id"], name: "index_job_applications_on_job_id"
     t.index ["response_token"], name: "index_job_applications_on_response_token", unique: true

@@ -9,6 +9,8 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">Job Poster #</th>
+      <th scope="col">Job #</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +19,8 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
+        <td><%= company.users.count %></td>
+        <td><%= Job.where(user: company.users).count %></td>
         <td><%= link_to 'Show', company, class: "btn btn-info" %></td>
         <td><%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

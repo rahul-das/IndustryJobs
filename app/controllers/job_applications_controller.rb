@@ -10,6 +10,7 @@ class JobApplicationsController < ApplicationController
     else
       @job_applications = JobApplication.where(job: Job.where(user: current_user.company.users))
     end
+
   end
 
   # GET /job_applications/1
@@ -80,7 +81,7 @@ class JobApplicationsController < ApplicationController
 
   def save_response
     @job_application.update_attributes(rejection_reason: params[:job_application][:rejection_reason])
-    redirect_to jobs_url
+    redirect_to jobs_url, notice: 'Thanks for submitting the rejection reason!'
   end
 
   private
@@ -91,6 +92,6 @@ class JobApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_application_params
-      params.require(:job_application).permit(:candidate_id, :job_id)
+      params.require(:job_application).permit(:candidate_id, :job_id, :rejection_reason)
     end
 end
