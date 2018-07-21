@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @job.user %>
+  <strong>Posted:</strong>
+  <%= "#{time_ago_in_words(@job.updated_at)} ago" %>
 </p>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |

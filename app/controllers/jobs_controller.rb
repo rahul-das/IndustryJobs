@@ -88,11 +88,20 @@ class JobsController < ApplicationController
   def apply
     unless user_signed_in?
       logger.info "#{params.inspect}"
-      @candidate = Candidate.find_or_create_by(name: params[:candidate][:name], email: params[:candidate][:email])
+      @candidate = Candidate.where(email: params[:candidate][:email]).last
+      if @candidate.blank?
+        @candidate = Candidate.find_or_create_by(name: params[:candidate][:name], email: params[:candidate][:email])
+      end
       if @candidate.present?
-        @job.job_applications.create(candidate: @candidate)
+        if @job.job_applications.where(candidate: @candidate).last.blank?
+          @job.job_applications.create(candidate: @candidate)
+          redirect_to jobs_url, notice: "Job Application successful!"
+        else # JobApplication Exists
+          redirect_to jobs_url, notice: "You have already applied for this Job!"
+        end
       end
     end
+
   end
 
   private

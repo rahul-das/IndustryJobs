@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :jobs
   belongs_to :company
   # we tell User that we can take company attributes
-  accepts_nested_attributes_for :company
+  # accepts_nested_attributes_for :company
   validates :email, presence: true, uniqueness: {scope: :company_id}
 end

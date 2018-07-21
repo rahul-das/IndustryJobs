@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for @job_application, url: save_response_job_application_path(@job_application), html: {method: "post"} do |f| %>
+
+  <div class="field">
+    <%= f.label :rejection_reason %>
+    <%= f.select :rejection_reason, JobApplication.rejection_reasons.keys.map { |w| [w.humanize, w] }, prompt: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_job_application_path(@job_application) %> |
+<%= link_to 'Back', job_applications_path %>

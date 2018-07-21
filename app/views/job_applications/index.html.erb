@@ -7,6 +7,8 @@
     <tr>
       <th>Candidate</th>
       <th>Job</th>
+      <th>Status</th>
+      <th>Response Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +18,11 @@
       <tr>
         <td><%= job_application.candidate.name %></td>
         <td><%= job_application.job.title %></td>
-        <td><%= link_to 'Show', job_application %></td>
-        <td><%= link_to 'Edit', edit_job_application_path(job_application) %></td>
-        <td><%= link_to 'Destroy', job_application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= job_application.status %></td>
+        <td><%= job_application.response_status %></td>
+        <td><%= link_to 'Invite for Interview', new_interview_path(job_application_id: job_application) %></td>
+        <!-- <td><%#= link_to 'Edit', edit_job_application_path(job_application) %></td>
+        <td><%#= link_to 'Destroy', job_application, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Job Application', new_job_application_path %>
+<%#= link_to 'New Job Application', new_job_application_path %>

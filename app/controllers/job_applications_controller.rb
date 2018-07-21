@@ -1,10 +1,15 @@
 class JobApplicationsController < ApplicationController
-  before_action :set_job_application, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_application, only: [:show, :edit, :update, :destroy, :save_response]
+  before_action :authenticate_user!, only: [:index, :show]
 
   # GET /job_applications
   # GET /job_applications.json
   def index
-    @job_applications = JobApplication.all
+    if current_user.admin?
+      @job_applications = JobApplication.all
+    else
+      @job_applications = JobApplication.where(job: Job.where(user: current_user.company.users))
+    end
   end
 
   # GET /job_applications/1
@@ -59,6 +64,23 @@ class JobApplicationsController < ApplicationController
       format.html { redirect_to job_applications_url, notice: 'Job application was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def set_response
+    @job_application = JobApplication.find_by_response_token(params[:response_token])
+    @job_application.update_attributes(response_status: params[:response])
+    respond_to do |format|
+      if @job_application.accepted?
+        format.html { redirect_to jobs_url, notice: 'You have accepted the interview invitation' }
+      elsif @job_application.rejected?
+        format.html {}
+      end
+    end
+  end
+
+  def save_response
+    @job_application.update_attributes(rejection_reason: params[:job_application][:rejection_reason])
+    redirect_to jobs_url
   end
 
   private

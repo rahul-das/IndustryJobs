@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to example.com, <%= @job_application.candidate.name %></h1>
+    <p>
+      <%= link_to 'Accept!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'accepted') %>
+      <%= link_to 'Reject!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'rejected') %>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

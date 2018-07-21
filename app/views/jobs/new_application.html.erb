@@ -1,8 +1,8 @@
 <h1>Apply Job</h1>
 
 <%= form_tag({controller: "jobs", action: "apply"}, method: "post") do %>
-  <%= search_field(:candidate, :name) %>
-  <%= email_field(:candidate, :email) %>
+  <%= text_field(:candidate, :name, placeholder: "Name") %>
+  <%= email_field(:candidate, :email, placeholder: "Email") %>
   <%#= hidden_field_tag 'job_id', '#params[id]' %>
   <%= submit_tag "Apply Job", data: { disable_with: "Please wait..." } %>
 <% end %>
