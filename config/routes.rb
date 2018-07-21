@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options :host => "localhost:3000"
+  default_url_options :host => "fast-depths-56174.herokuapp.com"
   resources :interviews
   resources :companies
   resources :job_applications do

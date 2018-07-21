@@ -4,14 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @job_application.candidate.name %></h1>
+    <h1>Welcome to fast-depths-56174.herokuapp.com, <%= @job_application.candidate.name %></h1>
     <p>
-      <%= link_to 'Accept!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'accepted') %>
-      <%= link_to 'Reject!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'rejected') %>
+      You are invited for an interview on <%= @job_application.interview.date.strftime("%B %d %Y") %> at <%= @job_application.interview.time.strftime("%I:%M%p") %>.
+      PLease click on <%= link_to 'Accept!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'accepted') %> if you're coming for the interview.
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      Otherwise click on <%= link_to 'Reject!', set_response_job_applications_url(response_token: @job_application.response_token, response: 'rejected') %> if you're unable to attend the interview.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>
+      To visit the site, just follow this link: <%= @url %>.
+    </p>
+    <p>Thanks for applying and have a great day!</p>
   </body>
 </html>
