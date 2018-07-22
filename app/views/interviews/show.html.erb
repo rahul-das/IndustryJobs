@@ -1,7 +1,9 @@
-<div class="alert alert-info alert-dismissible">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <%= notice %>
-</div>
+<% unless notice.blank? %>
+  <div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= notice %>
+  </div>
+<% end %>
 
 <p>
   <strong>Date:</strong>
