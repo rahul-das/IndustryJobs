@@ -19,7 +19,7 @@
     <%= select_tag 'job', options_from_collection_for_select(Job.where(job_applications: JobApplication.all), 'id', 'title'), prompt: "Choose Response Status", class: "form-control" %>
   </div>
   <div class="actions col-md-3">
-    <%= submit_tag 'Filter', class: "btn btn-secondary btn-block" %>
+    <%= submit_tag 'Apply Filters', class: "btn btn-primary btn-block" %>
   </div>
 <% end %>
 
@@ -32,7 +32,7 @@
       <th>Status</th>
       <th>Response Status</th>
       <th>Reason for Rejection</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
