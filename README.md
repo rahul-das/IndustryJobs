@@ -1,6 +1,6 @@
 # IndustryJobs
 
-IndustryJobs is a job application based portal where applicants can apply through their name & email without need to login. The job posters can post the jobs, check the applications and schedule interview based on those applications. The applicant will recieve an email once the interview is scheduled. The applicant can choose to accept or reject the interview and the decision will be shown to job posters.
+IndustryJobs is a job application based portal where applicants can apply through their name & email (without need to login). The job posters can post the jobs, check the applications and schedule interview based on those applications. The applicant will recieve an email once the interview is scheduled. The applicant can choose to accept or reject the interview and the decision will be shown to job posters.
 
 * Ruby version: 2.5.1p57
 * Rails version: 5.2.0
